@@ -1,0 +1,28 @@
+[
+  [
+    [
+      "status"
+    ],
+    "ambiguous"
+  ],
+  [
+    [
+      "candidates",
+      0,
+      "paths"
+    ],
+    [
+      [
+        "N8"
+      ]
+    ]
+  ],
+  [
+    [
+      "candidates",
+      1,
+      "number"
+    ],
+    42
+  ]
+]

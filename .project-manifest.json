@@ -1,0 +1,107 @@
+{
+  "project_shape": "backend",
+  "modules": [
+    {
+      "id": "app",
+      "path": "doorfolio/app.py",
+      "responsibility": "注册该服务公开数据入口"
+    },
+    {
+      "id": "http_service",
+      "path": "doorfolio/http_service.py",
+      "responsibility": "限定请求方法、内容体积和 JSON 传输边界"
+    },
+    {
+      "id": "contract",
+      "path": "doorfolio/contract.py",
+      "responsibility": "严格字段、范围及标识去重"
+    },
+    {
+      "id": "segment",
+      "path": "doorfolio/segment.py",
+      "responsibility": "段内按位换号"
+    },
+    {
+      "id": "walk",
+      "path": "doorfolio/walk.py",
+      "responsibility": "分日分支推演"
+    },
+    {
+      "id": "lookup",
+      "path": "doorfolio/lookup.py",
+      "responsibility": "双向档案查找"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "forward",
+      "name": "按有效日推演门牌",
+      "entry": "POST /doorfolio/forward",
+      "success": "苇岸道 13 号得到旧栈巷 31 号与西汊路 42 号，保留不同登记路径",
+      "failure": "对照 examples/forward.invalid.json 返回 400 和错误说明",
+      "verification": "python3 -B -m examples.check forward",
+      "steps": [
+        "接收 /doorfolio/forward",
+        "按有效日推演门牌",
+        "返回计算后的证据或合成结果"
+      ],
+      "module_ids": [
+        "app",
+        "http_service",
+        "lookup",
+        "segment",
+        "walk",
+        "contract"
+      ]
+    },
+    {
+      "id": "reverse",
+      "name": "从现门牌反查前址",
+      "entry": "POST /doorfolio/reverse",
+      "success": "西汊路 42 号反查到苇岸道 13 号，依次引用 N9、N7",
+      "failure": "对照 examples/reverse.invalid.json 返回 400 和错误说明",
+      "verification": "python3 -B -m examples.check reverse",
+      "steps": [
+        "接收 /doorfolio/reverse",
+        "从现门牌反查前址",
+        "返回计算后的证据或合成结果"
+      ],
+      "module_ids": [
+        "app",
+        "http_service",
+        "lookup",
+        "segment",
+        "walk",
+        "contract"
+      ]
+    },
+    {
+      "id": "inspect",
+      "name": "给出规则冲突及证据",
+      "entry": "POST /doorfolio/inspect",
+      "success": "N7 和 N8 的旧号重叠，首个共同门号为 13",
+      "failure": "对照 examples/inspect.invalid.json 返回 400 和错误说明",
+      "verification": "python3 -B -m examples.check inspect",
+      "steps": [
+        "接收 /doorfolio/inspect",
+        "给出规则冲突及证据",
+        "返回计算后的证据或合成结果"
+      ],
+      "module_ids": [
+        "app",
+        "http_service",
+        "lookup",
+        "segment",
+        "contract"
+      ]
+    }
+  ],
+  "complexity": {
+    "mechanisms": [
+      "段内按位换号",
+      "分日分支推演",
+      "双向档案查找",
+      "同日重叠见证"
+    ]
+  }
+}

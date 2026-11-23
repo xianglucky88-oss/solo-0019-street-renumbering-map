@@ -1,0 +1,36 @@
+{
+  "notices": [
+    {
+      "id": "N7",
+      "effective": "1971-04-01",
+      "before": {
+        "street": "苇岸道",
+        "first": 11,
+        "last": 17,
+        "stride": 2
+      },
+      "after": {
+        "street": "双栅街",
+        "first": 88,
+        "last": 82,
+        "stride": 2
+      }
+    },
+    {
+      "id": "N7",
+      "effective": "1971-04-01",
+      "before": {
+        "street": "苇岸道",
+        "first": 11,
+        "last": 17,
+        "stride": 2
+      },
+      "after": {
+        "street": "双栅街",
+        "first": 88,
+        "last": 82,
+        "stride": 2
+      }
+    }
+  ]
+}

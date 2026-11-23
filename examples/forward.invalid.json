@@ -1,0 +1,58 @@
+{
+  "notices": [
+    {
+      "id": "N7",
+      "effective": "1971-04-01",
+      "before": {
+        "street": "苇岸道",
+        "first": 11,
+        "last": 17,
+        "stride": 2
+      },
+      "after": {
+        "street": "双栅街",
+        "first": 88,
+        "last": 82,
+        "stride": 2
+      }
+    },
+    {
+      "id": "N8",
+      "effective": "1971-04-01",
+      "before": {
+        "street": "苇岸道",
+        "first": 13,
+        "last": 15,
+        "stride": 2
+      },
+      "after": {
+        "street": "旧栈巷",
+        "first": 31,
+        "last": 33,
+        "stride": 2
+      }
+    },
+    {
+      "id": "N9",
+      "effective": "1971-06-01",
+      "before": {
+        "street": "双栅街",
+        "first": 86,
+        "last": 82,
+        "stride": 2
+      },
+      "after": {
+        "street": "西汊路",
+        "first": 42,
+        "last": 46,
+        "stride": 2
+      }
+    }
+  ],
+  "from": "1971-03-31",
+  "to": "1971-06-01",
+  "address": {
+    "street": "",
+    "number": 13
+  }
+}
