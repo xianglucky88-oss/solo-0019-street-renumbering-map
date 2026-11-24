@@ -30,6 +30,26 @@
       "id": "lookup",
       "path": "doorfolio/lookup.py",
       "responsibility": "双向档案查找"
+    },
+    {
+      "id": "folio",
+      "path": "doorfolio/folio.py",
+      "responsibility": "换号册街廓授权、偏移区间运算、需求裁剪与片段校验"
+    },
+    {
+      "id": "registry",
+      "path": "doorfolio/registry.py",
+      "responsibility": "进程内换号册登记、分页交付与完整度判定"
+    },
+    {
+      "id": "bookwalk",
+      "path": "doorfolio/bookwalk.py",
+      "responsibility": "带交付证据与缺页见证的分日推演"
+    },
+    {
+      "id": "folio_lookup",
+      "path": "doorfolio/folio_lookup.py",
+      "responsibility": "换号册前查与显式新号反查归约"
     }
   ],
   "workflows": [
@@ -94,6 +114,70 @@
         "segment",
         "contract"
       ]
+    },
+    {
+      "id": "booklet_open",
+      "name": "开册并裁剪前后路径所需配对",
+      "entry": "POST /doorfolio/booklet_open",
+      "success": "两天两路汇流场景开出 P1-P4 四页，每则公告只含路径实际经过的偏移区间",
+      "failure": "重复开册、非法街廓或等长不符返回 400 和错误说明",
+      "verification": "python3 -B -m examples.folio_check",
+      "steps": [
+        "接收 booklet_open",
+        "按街廓与日期窗口算术裁剪 needs",
+        "返回页清单与偏移需求，不逐门生成"
+      ],
+      "module_ids": [
+        "app",
+        "http_service",
+        "registry",
+        "folio",
+        "segment",
+        "contract"
+      ]
+    },
+    {
+      "id": "booklet_deliver",
+      "name": "分页交付换号片段",
+      "entry": "POST /doorfolio/booklet_deliver",
+      "success": "仅 needs 内位置对齐片段被接收，缺页随交付减少",
+      "failure": "夹带不需要的配对、越页引证或重叠交付返回 400",
+      "verification": "python3 -B -m examples.folio_check",
+      "steps": [
+        "接收 booklet_deliver",
+        "校验片段街名、步长、偏移与所属页",
+        "落库并返回缺失页"
+      ],
+      "module_ids": [
+        "app",
+        "http_service",
+        "registry",
+        "folio",
+        "contract"
+      ]
+    },
+    {
+      "id": "booklet_query",
+      "name": "册内带证据前查与显式新号反查",
+      "entry": "POST /doorfolio/booklet_forward 与 /doorfolio/booklet_reverse",
+      "success": "缺渡口街页时旧栈巷只报一路并点名 P2/P4，补齐后两路同址双路径齐备",
+      "failure": "越权街廓返回 out_of_scope，缺页返回 incomplete 而非伪完整答案",
+      "verification": "python3 -B -m examples.folio_check",
+      "steps": [
+        "接收册内查询",
+        "按交付证据分日推演并记录缺页见证",
+        "区分 unchanged、mapped、incomplete、out_of_scope"
+      ],
+      "module_ids": [
+        "app",
+        "http_service",
+        "folio_lookup",
+        "bookwalk",
+        "registry",
+        "folio",
+        "segment",
+        "contract"
+      ]
     }
   ],
   "complexity": {
@@ -101,7 +185,10 @@
       "段内按位换号",
       "分日分支推演",
       "双向档案查找",
-      "同日重叠见证"
+      "同日重叠见证",
+      "偏移区间算术裁剪",
+      "分页证据与缺页见证",
+      "进程内册隔离"
     ]
   }
 }

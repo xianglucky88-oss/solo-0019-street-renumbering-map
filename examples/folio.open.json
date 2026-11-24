@@ -1,0 +1,89 @@
+{
+  "booklet_id": "demo-folio",
+  "from": "1971-03-31",
+  "to": "1971-04-02",
+  "scopes": [
+    {
+      "street": "旧栈巷",
+      "first": 2,
+      "last": 8,
+      "stride": 2
+    },
+    {
+      "street": "新港街",
+      "first": 100,
+      "last": 106,
+      "stride": 2
+    }
+  ],
+  "notices": [
+    {
+      "id": "N1",
+      "effective": "1971-04-01",
+      "before": {
+        "street": "旧栈巷",
+        "first": 2,
+        "last": 8,
+        "stride": 2
+      },
+      "after": {
+        "street": "过渡街",
+        "first": 20,
+        "last": 26,
+        "stride": 2
+      },
+      "page": "P1"
+    },
+    {
+      "id": "N2",
+      "effective": "1971-04-01",
+      "before": {
+        "street": "旧栈巷",
+        "first": 2,
+        "last": 8,
+        "stride": 2
+      },
+      "after": {
+        "street": "渡口街",
+        "first": 40,
+        "last": 46,
+        "stride": 2
+      },
+      "page": "P2"
+    },
+    {
+      "id": "N3",
+      "effective": "1971-04-02",
+      "before": {
+        "street": "过渡街",
+        "first": 20,
+        "last": 26,
+        "stride": 2
+      },
+      "after": {
+        "street": "新港街",
+        "first": 100,
+        "last": 106,
+        "stride": 2
+      },
+      "page": "P3"
+    },
+    {
+      "id": "N4",
+      "effective": "1971-04-02",
+      "before": {
+        "street": "渡口街",
+        "first": 40,
+        "last": 46,
+        "stride": 2
+      },
+      "after": {
+        "street": "新港街",
+        "first": 100,
+        "last": 106,
+        "stride": 2
+      },
+      "page": "P4"
+    }
+  ]
+}

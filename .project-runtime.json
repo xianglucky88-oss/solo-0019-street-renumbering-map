@@ -18,6 +18,26 @@
     {
       "workflow_id": "inspect",
       "command": "python3 -B -m examples.check inspect"
+    },
+    {
+      "workflow_id": "booklet_open",
+      "command": "python3 -B -m examples.folio_check"
+    },
+    {
+      "workflow_id": "booklet_deliver",
+      "command": "python3 -B -m examples.folio_check"
+    },
+    {
+      "workflow_id": "booklet_query",
+      "command": "python3 -B -m examples.folio_check"
+    },
+    {
+      "workflow_id": "booklet_scenario",
+      "command": "python3 -B -m examples.folio_scenario"
+    },
+    {
+      "workflow_id": "booklet_edges",
+      "command": "python3 -B -m examples.folio_edges"
     }
   ]
 }
